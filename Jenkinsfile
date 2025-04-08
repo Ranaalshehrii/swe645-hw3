@@ -39,6 +39,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Updating Cluster Pods'){
+            steps{
+                script{
+                    sh "kubectl rollout restart deployment survey-deployment"
+                }
+            }
+
+        }
     }
     
     post {
