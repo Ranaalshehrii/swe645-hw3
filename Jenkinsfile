@@ -43,7 +43,7 @@ pipeline {
         stage('Updating Cluster Pods'){
             steps{
                 script{
-                    sh "kubectl rollout restart deployment survey-deployment"
+                    sh "kubectl set image deployment/survey-deployment container-0=ranaalshehri/swe645-hw2-student-survey-amd64:latest"
                 }
             }
 
