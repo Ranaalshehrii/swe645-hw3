@@ -32,19 +32,19 @@ This microservice application uses a MySQL database hosted on Amazon RDS for sto
   
   **MySQL RDS Database Config:**
   
-```properties
-spring.datasource.url=jdbc:mysql://student-survey-db.cpo6pmgwxit1.us-east-1.rds.amazonaws.com:3306/student-survey-db
-spring.datasource.username=admin
-spring.datasource.password=${DB_PASSWORD}
-```
+  ```properties
+  spring.datasource.url=jdbc:mysql://student-survey-db.cpo6pmgwxit1.us-east-1.rds.amazonaws.com:3306/student-survey-db
+  spring.datasource.username=admin
+  spring.datasource.password=${DB_PASSWORD}
+  ```
   **Hibernate settings:**
   
-```properties
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
-```
+  ```properties
+  spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+  spring.jpa.hibernate.ddl-auto=update
+  spring.jpa.show-sql=true
+  spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+  ```
 
 > Note: RDS automatically creates the schema from the Spring Boot entity if `spring.jpa.hibernate.ddl-auto=update` is enabled.
 
