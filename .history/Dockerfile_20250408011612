@@ -1,0 +1,16 @@
+# Dockerfile
+
+# Use a lightweight base image with Java 17
+FROM openjdk:17-jdk-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the built JAR file to the container (we'll build this JAR file later)
+COPY target/student-survey-0.0.1-SNAPSHOT.jar student-survey.jar
+
+# Expose the application port (Spring Boot defaults to 8080)
+EXPOSE 8080
+
+# Command to run the Spring Boot application
+ENTRYPOINT ["java", "-jar", "student-survey.jar"]

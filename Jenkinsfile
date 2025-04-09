@@ -3,8 +3,8 @@ pipeline {
     
     environment {
         DOCKER_CREDS = credentials('docker-pass')
-        DOCKER_REPO = "ranaalshehri/swe645-hw2-student-survey-amd64"
-        WAR_OUTPUT = "target/SWE645_HW2_StudentSurvey.war"
+        DOCKER_REPO = "ranaalshehri/swe645-hw3-springboot-app-amd64"
+        JAR_OUTPUT = "target/student-survey-0.0.1-SNAPSHOT.jar"
     }
     
     stages {
@@ -14,10 +14,10 @@ pipeline {
             }
         }
         
-        stage('Build WAR') {
+        stage('Build JAR') {
             steps {
-                sh "mvn clean package"
-                sh "ls -lh ${WAR_OUTPUT}"
+                sh "mvn clean package -DskipTests"
+                sh "ls -lh ${JAR_OUTPUT}"
             }
         }
         

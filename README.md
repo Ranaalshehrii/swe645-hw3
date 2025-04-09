@@ -1,6 +1,6 @@
 # SWE645 HW3 - EC2 Instance Setup and Kubernetes Cluster Deployment using Rancher with Jenkins CI/CD Pipeline
 
-This repository contains part of the **backend** of the **SWE645 HW2** assignment, which includes YAML files, config files, and images.
+This repository contains part of the **backend** of the **SWE645 HW3** assignment, which includes YAML files, config files, and images.
 
 YAML Files included for:
 - Cluster
@@ -8,19 +8,13 @@ YAML Files included for:
 - Node Port Service
 - KubeConfig
 
-These YAML Files were not modified manually, they were **auto generated** by following the steps below. YAML Files for the 3 Pods are not included because they could change if a Pod goes down.
-
-Links:
-
-[Home Page](http://ec2-54-205-232-217.compute-1.amazonaws.com:31221/StudentSurvey/)
-
-[Survey Page](http://ec2-54-205-232-217.compute-1.amazonaws.com:31221/StudentSurvey/survey.html)
+These YAML Files were not modified manually, they were **auto generated** by following the steps below. YAML Files for the 3 Pods are not included because they could change if a Pod goes down. Machines from HW2 were reused.
 
 ---
 
 ## Prerequisites
 
-Before beginning this part, please complete part 1 from Rana's branch in this repository. Also have with you:
+Before beginning this part, please complete part 1 from Kris' branch in this repository. Also have with you:
 
 - **Docker Image Tag**: The same image tag you created in part 1.
 - **AWS Account**: To create EC 2 instances to run your cluster.

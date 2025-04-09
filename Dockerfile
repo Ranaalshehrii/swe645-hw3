@@ -1,10 +1,14 @@
-FROM tomcat:9.0-jdk15
+# Base image
+FROM openjdk:17-jdk
 
-# Copy the built WAR file into Tomcat's webapps directory
-COPY target/SWE645_HW2_StudentSurvey.war /usr/local/tomcat/webapps/StudentSurvey.war
-
-# Expose port 8080 for access
+# Expose port for application
 EXPOSE 8080
 
-# Start Tomcat
-CMD ["catalina.sh", "run"]
+# Set arguement for jar file
+ARG JAR_FILE=target/student-survey-0.0.1-SNAPSHOT.jar
+
+# Copy to current directory 
+COPY ${JAR_FILE} .
+
+# Command to run application
+CMD [ "java", "-jar",  "student-survey-0.0.1-SNAPSHOT.jar"]
