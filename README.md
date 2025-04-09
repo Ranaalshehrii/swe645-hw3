@@ -20,7 +20,7 @@ This microservice application uses a MySQL database hosted on Amazon RDS for sto
 - Set **Public Access**: `Yes` during database creation.
 - Used the **default VPC security group**.
 
-### 🔹 Step 4: Configure Security Group
+### Step 4: Configure Security Group
 - Edited **Inbound Rules** of the selected security group:
   - Added rule:
     - **Type**: MySQL/Aurora
