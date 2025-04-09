@@ -47,7 +47,18 @@ This microservice application uses a MySQL database hosted on Amazon RDS for sto
 
       ![alt text](images/(2)9_Save.png)
 
-### Step 5: Provide Connection Details
+### Step 5: Get the RDS Endpoint URL
+- After the database is created, go back to the **Amazon RDS dashboard**.
+- Click on your DB instance name (e.g., `student-survey-db`).
+- Under the **Connectivity & security** tab.
+- Copy the **Endpoint** value (e.g., `student-survey-db.cpo6pmgwxit1.us-east-1.rds.amazonaws.com`).
+- This endpoint will be used in your Spring Boot `application.properties`.
+
+  ![alt text](images/10_Dash.png)
+
+  ![alt text](images/11_Endpoint.png)
+  
+### Step 6: Provide Connection Details
 - Shared the following credentials with the team to update `application.properties`:
   
   **MySQL RDS Database Config:**
