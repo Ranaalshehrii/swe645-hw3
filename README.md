@@ -45,7 +45,7 @@ This microservice application uses a MySQL database hosted on Amazon RDS for sto
 
       ![alt text](images/8_Add.png)
 
-      ![alt text](images/9_Save.png)
+      ![alt text](images/(2) 9_Save.png)
 
 ### Step 5: Provide Connection Details
 - Shared the following credentials with the team to update `application.properties`:
