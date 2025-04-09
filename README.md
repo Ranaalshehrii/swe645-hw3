@@ -18,6 +18,10 @@ This microservice application uses a MySQL database hosted on Amazon RDS for sto
 
   ![alt text](images/1_CreateDatabase.jpg)
 
+  ![alt text](images/2_Engin.png)
+  
+  ![alt text](images/2_Template.png)
+
 ### Step 3: Enable Public Access
 - Set **Public Access**: `Yes` during database creation.
 - Used the **default VPC security group**.
