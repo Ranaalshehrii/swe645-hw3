@@ -14,7 +14,7 @@ This microservice application uses a MySQL database hosted on Amazon RDS for sto
   - Template: **Free tier** or **Dev/Test**
   - DB instance identifier: `student-survey-db`
   - Master username: `admin`
-  - Master password: `${RDS_MASTER_PASSWORD}`
+  - Master password: `${DB_PASSWORD}`
 
   ![alt text](images/1_CreateDatabase.jpg)
 
