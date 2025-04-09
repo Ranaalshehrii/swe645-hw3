@@ -29,7 +29,7 @@ This microservice application uses a MySQL database hosted on Amazon RDS for sto
 
 ### Step 5: Provide Connection Details
 - Shared the following credentials with the team to update `application.properties`:
-# MySQL RDS Database Config
+### MySQL RDS Database Config
 spring.datasource.url=jdbc:mysql://student-survey-db.cpo6pmgwxit1.us-east-1.rds.amazonaws.com:3306/student-survey-db
 spring.datasource.username=admin
 spring.datasource.password=${DB_PASSWORD}
