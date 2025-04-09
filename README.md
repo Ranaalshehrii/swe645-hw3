@@ -16,19 +16,19 @@ This microservice application uses a MySQL database hosted on Amazon RDS for sto
   - Master username: `admin`
   - Master password: `${DB_PASSWORD}`
 
-  ![alt text](images/1_CreateDatabase.jpg)
+    ![alt text](images/1_CreateDatabase.jpg)
 
-  ![alt text](images/2_Engin.png)
+    ![alt text](images/2_Engin.png)
   
-  ![alt text](images/3_Template.png)
+    ![alt text](images/3_Template.png)
 
-  ![alt text](images/4_Setting.png)
+    ![alt text](images/4_Setting.png)
   
 ### Step 3: Enable Public Access
 - Set **Public Access**: `Yes` during database creation.
 - Used the **default VPC security group**.
 
-![alt text](images/5_Public.png)
+  ![alt text](images/5_Public.png)
 
 ### Step 4: Configure Security Group
 - Open the Security Group settings page.
