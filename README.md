@@ -31,11 +31,21 @@ This microservice application uses a MySQL database hosted on Amazon RDS for sto
 ![alt text](images/5_Public.png)
 
 ### Step 4: Configure Security Group
+- Open the Security Group settings page.
+
+   ![alt text](images/6_Open.png)
+  
 - Edited **Inbound Rules** of the selected security group:
   - Added rule:
     - **Type**: MySQL/Aurora
     - **Port**: 3306
     - **Source**: `0.0.0.0/0` (temporarily allowed all IPs for development)
+      
+      ![alt text](images/7_Edit.png)
+
+      ![alt text](images/8_Add.png)
+
+      ![alt text](images/9_Save.png)
 
 ### Step 5: Provide Connection Details
 - Shared the following credentials with the team to update `application.properties`:
