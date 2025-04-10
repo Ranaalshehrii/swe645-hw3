@@ -59,7 +59,7 @@ This microservice application uses a MySQL database hosted on Amazon RDS for sto
   ![alt text](images/(2)11_Endpoint.png)
   
 ### Step 6: Provide Connection Details
-- Update `application.properties` with the following credentials:
+- Update `application.properties` by adding the following credentials:
   
   **MySQL RDS Database Config:**
   
