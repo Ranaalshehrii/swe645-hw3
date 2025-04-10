@@ -88,7 +88,8 @@ java -jar target/student-survey-0.0.1-SNAPSHOT.jar
 | POST       | /survey/save            | Save a new survey                   |
 | GET        | /survey/all             | Get all survey responses            |
 | GET        | /survey/{id}            | Get a specific survey by ID         |
-| DELETE     | /survey/{id}            | Delete a specific survey by ID      |
+| DELETE     | /delete/{id}            | Delete a specific survey by ID      |
+| PUT        | /update/{id}            | Update a specific survey by ID      |
 
 #### **3. Example POST Request**
 
@@ -123,8 +124,29 @@ java -jar target/student-survey-0.0.1-SNAPSHOT.jar
 #### **5. Example DELETE Request**
 
 - **Delete Survey By ID**  
-  - **URL:** `http://localhost:8080/survey/1`
+  - **URL:** `http://localhost:8080/delete/1`
   - **Method:** DELETE
+
+  #### **6. Example PUT Request**
+
+  - **Update Survey By ID**
+    - **URL** `http://localhost:8080/update/1`
+    - **Method:** PUT
+    - **Body:** (JSON)
+  ```json
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "city": "Fairfax",
+    "state": "VA",
+    "zip": "22030",
+    "telephoneNumber": "123-456-7890",
+    "likedMost": "Location",
+    "interestSource": "Friend",
+    "recommendation": "Yes"
+  }
+  ```
 
 ---
 
