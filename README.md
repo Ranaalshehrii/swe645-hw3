@@ -3,7 +3,7 @@
 This microservice application uses a MySQL database hosted on Amazon RDS for storing survey responses. Below are the steps used to create and configure the database:
 
 ### Step 1: Access AWS Academy Lab
-- Logged into AWS Academy Lab using AWS Learner Lab credentials provided by Joey.
+- Logged into AWS Academy Lab.
 - Launched the lab environment and accessed the AWS Console.
 
 ### Step 2: Create RDS MySQL Instance
@@ -52,14 +52,14 @@ This microservice application uses a MySQL database hosted on Amazon RDS for sto
 - Click on your DB instance name (e.g., `student-survey-db`).
 - Under the **Connectivity & security** tab.
 - Copy the **Endpoint** value (e.g., `student-survey-db.cpo6pmgwxit1.us-east-1.rds.amazonaws.com`).
-- This endpoint will be used in your Spring Boot `application.properties`.
+- This endpoint will be used in our Spring Boot `application.properties`.
 
   ![alt text](images/(2)10_Dash.png)
 
   ![alt text](images/(2)11_Endpoint.png)
   
 ### Step 6: Provide Connection Details
-- Shared the following credentials with the team to update `application.properties`:
+- Update `application.properties` with the following credentials:
   
   **MySQL RDS Database Config:**
   
