@@ -1,6 +1,6 @@
-# SWE645 HW3 - EC2 Instance Setup and Kubernetes Cluster Deployment using Rancher with Jenkins CI/CD Pipeline
+# SWE645 HW3 - Docker setup, EC2 Instance Setup and Kubernetes Cluster Deployment using Rancher with Jenkins CI/CD Pipeline
 
-This repository contains part of the **backend** of the **SWE645 HW3** assignment, which includes YAML files, config files, and images.
+This repository contains part of the **backend** of the **SWE645 HW3** assignment, which includes Dockerfile, Jenkinsfile, YAML files, config files, and images.
 
 YAML Files included for:
 - Cluster
@@ -8,7 +8,7 @@ YAML Files included for:
 - Node Port Service
 - KubeConfig
 
-These YAML Files were not modified manually, they were **auto generated** by following the steps below. YAML Files for the 3 Pods are not included because they could change if a Pod goes down. Machines from HW2 were reused.
+These YAML Files were not modified manually, they were **auto generated** by following the steps below. YAML Files for the 3 Pods are not included because they could change if a Pod goes down. Machines from HW2 were reused, so most of this will be repeat for HW2
 
 ---
 
@@ -16,18 +16,69 @@ These YAML Files were not modified manually, they were **auto generated** by fol
 
 Before beginning this part, please complete part 1 from Kris' branch in this repository. Also have with you:
 
-- **Docker Image Tag**: The same image tag you created in part 1.
+- **DockerHub Account**: To create Docker image
 - **AWS Account**: To create EC 2 instances to run your cluster.
+- **Part 1 project files**
+
+Make sure the following tools are installed:
+- **Git**: Version control
+- **Maven**: To build the application jar file
+- **Docker**: To containerize and run the application
+- **Java**: To run the webserver and for Jenkins
 
 ## Setup Instructions
+### Docker Image
 ### 1. Clone the repository:
 To get started, clone this repository to your local machine:
 ```
-git clone https://github.com/USERNAME/REPOSITORY_NAME.git
-cd REPOSITORY_NAME
+git clone https://github.com/Ranaalshehrii/swe645-hw3.git
+cd swe645-hw3
 ```
 
-### 2. Log into you AWS Account:
+### 2. Build the application
+
+Run the following command to build the jar file. Make sure you are in the directory specified above:
+```shell
+    $ mvn clean package -DskipTests
+```
+
+This will build and generate the jar file under the target/ directory.
+Check that this jar file exist in the target directory before continuing:
+
+- student-survey-0.0.1-SNAPSHOT.jar
+
+
+### 3. Build, run, and push Docker image
+
+Once you have validated the jar file or solved and issues with the build, execute the following command in the same directory as before using the included Dockerfile:
+```shell
+    $ docker build -t ranaalshehri/swe645-hw3-springboot-app-amd64:latest .
+```
+
+You should see the new image pop up on docker desktop.
+
+To test the application locally, you can run the image in a container like so:
+```shell
+    $ docker run -d -p 8080:8080 ranaalshehri/swe645-hw3-springboot-app-amd64
+```
+
+Once up and running, you can test the functionality just like in Kris' branch (Part 1) in a web browser or using Postman.
+
+Push your image to DockerHub like so:
+```shell
+    $ docker login
+```
+Following prompts to sign in, then:
+```shell
+    $ docker push ranaalshehri/swe645-hw3-springboot-app-amd64:latest
+```
+
+If all the test run successfully, you can now setup your EC2 instances and Kubernetes Cluster like in HW2
+
+### **Steps below were reused from HW2, please make sure to use the correct image tag you created or the one we used above** 
+
+### EC2 Instances and Kubernetes Cluster Deployment
+### 4. Log into you AWS Account:
 Here you have two choices:
 
 - [Personal AWS Acount login](https://aws.amazon.com/console/)
@@ -40,7 +91,7 @@ If your professor gave you an account for AWS Leaner Lab, you can use that to ge
 For this assignment, we will be using AWS Learner Lab.
 
 
-### 3. Create EC2 Instances:
+### 5. Create EC2 Instances:
 For this part, we will be using two(2) EC2 instances. One will setup the cluster, while the other will run the actual cluster.
 
 - Log into AWS Learner Lab
@@ -81,7 +132,7 @@ For this part, we will be using two(2) EC2 instances. One will setup the cluster
 ![alt text](images/pic7.png)
 
 
-### 4. Setup Rancher on one of the instances
+### 6. Setup Rancher on one of the instances
 Once your machines are online, we can connect to the both of them. Your machines are ready when the status check shows '2/2 checks passed' on the EC2 Dashboard.
 
 ![alt text](images/pic8.png)
@@ -146,7 +197,7 @@ Once your machines are online, we can connect to the both of them. Your machines
 
 ![alt text](images/pic16.png)
 
-### 5. Create our cluter:
+### 7. Create our cluter:
 
 - Click on 'create' from the previous image
 
@@ -178,7 +229,7 @@ Once your machines are online, we can connect to the both of them. Your machines
 ```
 - Paste and save in that file. Now with our cluster setup, we can deploy our application with a Deployment.
 
-### 6.Deploy web application using Deployment:
+### 8.Deploy web application using Deployment:
 
 - Back on the Racher Dashboard. Click home, then click your cluster to access your cluster dashboard like below:
 
@@ -194,7 +245,7 @@ Once your machines are online, we can connect to the both of them. Your machines
 
 ![alt text](images/pic24.png)
 
-### 7. Add new security rule and access application
+### 9. Add new security rule and access application
 
 - In order to see our application, we need to add this port number as a new inbound rule to our security group just like we did for ports 80, 8080, 22, and 443. Go back to your AWS Dashboard on the EC2 instance page. Scroll down under Network & Security and click Security Groups.
 
@@ -211,20 +262,188 @@ Once your machines are online, we can connect to the both of them. Your machines
 ![alt text](images/pic27.png)
 
 
-- With this rule added, we can now access our application using the NodePort service we created. Go back to your EC2 instances page. Select the **SECOND** machine, the one that has the actual cluster running on it. Click on the Public IPv4 DNS link to get this page. This is expected.
+- With this rule added, we can now access our application using the NodePort service we created. Go back to your EC2 instances page. Select the **SECOND** machine, the one that has the actual cluster running on it. Get the Public IPv4 address, for us this is "54.205.232.217", and create the following URL: "http://54.205.232.217. 
 
-![alt text](images/pic28.png)
-
-- To access our home page and survey page, we need to add specific parts to the end of this URL. You need to add ":"NodePort Number"/"war file name"/ to get the home page and add ":"NodePort Number"/"war file name"/"survey file name".html/ to get the survey file. In our case, we add "::31221/StudentSurvey/" and ":31221/StudentSurvey/survey.html" to the end of the URL. 
+- To access our application, we need to add specific parts to the end of this URL. You need to add ":"NodePort Number"/"desired endpoint"/ to get the responce from the database you wish. In our case, we add ":31221/survey/save" to save the survey data and ":31221/survey/all" to get all surveys from the database. 
 
 **NOTE: Make sure to change form https to http or the link won't work**
 
-- Home page at [link](http://ec2-54-205-232-217.compute-1.amazonaws.com:31221/StudentSurvey/)
+- Application at [link](http://54.205.232.217:31221/<endpoint>)
+
+- See Kris' Branch from Part 1 for the possible endpoints.
+- Ex. To get all surveys, visit [link](http://54.205.232.217:31221/survey/all)
+
+![alt text](images/pic28.png)
+
+**NOTE: Links will only work in your machines are running. If you are using AWS Learner Lab. machines auto-shutoff after 4hrs.**
+
+
+### Jenkins CI/CD Pipeline
+### 10. Install Jenkins
+
+With the application, machines, and cluster now setup, we can now setup our CI/CD Pipeline to automate:
+- building the application jar file
+- building docker image and pushing the updated image
+- Updating the image on the cluster pods
+
+To start, update system packages on both EC2 instances:
+```shell
+    $ sudo apt update
+    $ sudo apt upgrade -y
+```
+
+Then, on the **SECOND** machine, the one running the cluster and pods, install these packages and validate java:
+```shell
+    $ sudo apt install fontconfig openjdk-17-jre -y
+    $ java -version
+```
+
+Expected output:
+```shell
+    openjdk version "17.0.13" 2024-10-15
+    OpenJDK Runtime Environment (build 17.0.13+11-Debian-2)
+    OpenJDK 64-Bit Server VM (build 17.0.13+11-Debian-2, mixed mode, sharing)
+```
+
+Add the Jenkins Repository and Key:
+```shell
+    sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+    https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+    echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+    https://pkg.jenkins.io/debian-stable binary/" | sudo tee \
+    /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+    sudo apt-get update
+```
+
+Install Jenkins:
+```shell
+    $ sudo apt install jenkins -y
+```
+
+Start and Enable Jenkids:
+```shell
+    $ sudo systemctl enable jenkins
+    $ sudo systemctl start jenkins
+    $ sudo systemctl status jenkins
+```
+
+### 11. Access Jenkins Dashboard
+Visit Jenkins Dashboard at: [link](http://<EC2-Public-IP>:8080>)
+
+Get the initial admin password using the following command:
+```shell
+    $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+
+On the Customize Jenkins page, install suggested plugins
+
+Then create an admin account by filling in the username, password, name, and email you want
+
+### 12. Setup Jenkins Plugins
+
+On the main dashboard page, go to Manage Jenkins and click Plugins
 
 ![alt text](images/pic29.png)
 
-- Survey page at [link](http://ec2-54-205-232-217.compute-1.amazonaws.com:31221/StudentSurvey/survey.html)
+Install the following plugins if they are not already installed:
+- Git plugin
+- Docker Pipeline
+- Kubernetes plugin
+
+### 13. Install Docker and give Jenkins access
+
+Now, we need to allow Jenkins to use docker for docker commands
+
+If docker is not installed on your machine, do so with this:
+```shell
+    $ sudo apt update
+    $ sudo apt install docker.io -y
+    $ sudo apt update
+    $ sudo systemctl start docker
+    $ sudo systemctl enable docker
+```
+Then give Jenkins permission to use docker:
+```shell
+    $ sudo usermod -aG docker jenkins
+```
+
+Check that this worked with:
+```shell
+    $ groups jenkins
+
+    output:
+    jenkins: jenkins docker
+```
+
+Now, reboot this EC2 instance and then reconnect
+
+### 14. Setup Credentials with Jenkins
+
+Now, we need to give Jenkins all credentials needed for it to function, this includes
+- **DockerHub**: To pull new image and push new images
+- **GitHub**: To access source code and detect changes
+- **KubeConfig**: To perform kubectl commands
+
+Go to Manage Jenkins -> Credentials -> click (global) -> Add Credentials
 
 ![alt text](images/pic30.png)
 
-**NOTE: Links will only work in your machines are running. If you are using AWS Learner Lab. machines auto-shutoff after 4hrs.**
+![alt text](images/pic31.png)
+
+![alt text](images/pic32.png)
+
+
+For DockerHub and GitHub Credentials:
+- **Kind**: Username with password
+- **Scope**: Global
+- **Username**: Your username
+- **Password**: Your password
+- **ID**: Tag to use inside Jenkinsfile to reference this credentials information
+- **Description**: Optional field to describe this credential
+
+For KubeConfig file:
+
+Copy your KubeConfig file over from its existing .kube folder to the one jenkins has with the following command
+```shell
+    $ cp /root/.kube/config /var/lib/jenkins/.kube
+```
+
+### 15. Setup Pipeline
+
+Now, we can setup the pipeline
+
+Back on the main dashboard page, click New Item, click Pipeline
+
+![alt text](images/pic33.png)
+
+Click **GitHub Project** and paste the URL:
+
+![alt text](images/pic34.png)
+
+
+Define your pipeline like so:
+- Pipeline script from SCM(Pipeline will get Jenkinsfile script from your SCM):
+  - SCM: Git
+  - Repo URL
+  - Select GitHub Credentials added earlier
+  - Branch: The branch you want Jenkins to build off of
+  - Script Path: Path to Jenkkinsfile in GitHub Repo (Just 'Jenkinsfile' if in top level)
+
+![alt text](images/pic35.png)
+
+Now, go to **Triggers** section to set the pipeline to poll every minute. This means that Jenkins will check every minute for changes and schedule a build if changes are detected.
+
+Click **Poll SCM** -> Enter "* * * * *" (5 stars with 1 space in between each)
+to poll every minute
+
+![alt text](images/pic36.png)
+
+### 16. Build Pipeline
+
+Go to main dashboard, select your pipeline, click build now. Make sure you have a Jenkinsfile like the on included in this respository.
+
+![alt text](images/pic37.png)
+
+
