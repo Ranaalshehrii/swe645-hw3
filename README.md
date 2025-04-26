@@ -1,7 +1,6 @@
-
 ### **Student Survey Application**
 
-This project is a Spring Boot application that collects survey data from users. 
+This project is a Spring Boot application that collects survey data from users. It can be easily tested using Postman.
 
 ---
 
@@ -28,12 +27,10 @@ cd swe645-hw3
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ```
-
----
-
 ### **Spring Initializr Setup**
 
 ![Project Initializr](images/Step1.jpg)
+---
 
 ### **Building and Running the Application Locally**
 
@@ -55,15 +52,12 @@ OR
 
 ---
 ---
-
 ### **Project Structure**
 
 The folder structure of this application is shown below:
 
 ![Project Structure](images/Structure.jpg)
-
 ---
-
 
 #### **2. Run the Spring Boot Application**
 
@@ -107,5 +101,68 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
 > Note: RDS automatically creates the schema from the Spring Boot entity if `spring.jpa.hibernate.ddl-auto=update` is enabled.
 
 ---
+
+### **Testing with Postman**
+
+#### **1. Postman Setup**
+
+- Base URL: `http://localhost:8080`
+
+#### **2. API Endpoints**
+
+| HTTP Method | Endpoint      | Description                       |
+|-------------|---------------|-----------------------------------|
+| POST        | /survey/save  | Save a new survey                 |
+| GET         | /survey/all   | Get all survey responses          |
+| GET         | /survey/{id}  | Get a specific survey by ID       |
+| DELETE      | /delete/{id}  | Delete a specific survey by ID    |
+| PUT         | /update/{id}  | Update a specific survey by ID    |
+
+#### **3. Example POST Request**
+
+- URL: `http://localhost:8080/survey/save`  
+- Method: POST  
+- Body: (JSON)
+
+```json
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "city": "Fairfax",
+  "state": "VA",
+  "zip": "22030",
+  "telephoneNumber": "123-456-7890",
+  "likedMost": "Location",
+  "interestSource": "Friend",
+  "recommendation": "Yes"
+}
+```
+![Project Structure](images/save.jpg)
+#### **4. Example GET Requests**
+
+- Get All Surveys  
+  - URL: `http://localhost:8080/survey/all`  
+  - Method: GET
+![Project Structure](images/all.jpg)
+- Get Survey By ID  
+  - URL: `http://localhost:8080/survey/1`  
+  - Method: GET
+![Project Structure](images/get.jpg)
+#### **5. Example DELETE Request**
+
+- Delete Survey By ID  
+  - URL: `http://localhost:8080/delete/1`  
+  - Method: DELETE
+![Project Structure](images/Delete.jpg)
+![Project Structure](images/al-after-delete.jpg)
+#### **6. Example PUT Request**
+
+- Update Survey By ID  
+  - URL: `http://localhost:8080/update/2`  
+  - Method: PUT  
+  - Body: (JSON)
+
+![Project Structure](images/update.jpg)
 
 ---
