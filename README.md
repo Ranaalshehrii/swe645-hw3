@@ -124,20 +124,6 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
 - Method: POST  
 - Body: (JSON)
 
-```json
-{
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
-  "city": "Fairfax",
-  "state": "VA",
-  "zip": "22030",
-  "telephoneNumber": "123-456-7890",
-  "likedMost": "Location",
-  "interestSource": "Friend",
-  "recommendation": "Yes"
-}
-```
 ![Project Structure](images/save.jpg)
 #### **4. Example GET Requests**
 
